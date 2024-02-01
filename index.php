@@ -15,21 +15,30 @@
 
         echo "<br>";
         $squadra1=["gregorio","matteo","milena","snizhana", "trixia","vincenzo", "mario","maria","katerina", "pippo","paperino"];
-        $squadra2=["gregorio","matteo","milena","snizhana", "trixia","vincenzo", "cicco","framco","fantozzi", "viktor","paperino"];
-        $partite=["squadra1"=>[$squadra1,$squadra2], "squadra2"=>[$squadra1,$squadra2]];
+        $squadra2=["gregorio","matteo","milena","snizhana", "trixia","vincenzo", "cicco","franco","fantozzi", "viktor","paperino"];
+        $squadra3=["flanella","cotone","canapa","lino", "seta","vincenzo", "cicco","franco","fantozzi", "viktor","paperino"];
+        
+        //guarda l'etichetta!!! se l'etichetta è uguale diventa un casino!!!
+        $tutte=["Milano"=>$squadra1, "Venezia"=>$squadra2, "Torino"=>$squadra3];
+        echo "<br>";
+        print count($tutte);
+
+        $partite=[[$squadra1,$squadra2], [$squadra1,$squadra3]];
 
         $first_names = array_column($partite, 'partita');
 
-        $serieA=["A" => [$squadra1], "B" => [$squadra2]];
+        $serieA=["A" => [$partite], "B" => [$partite]];
 
-        
-        // foreach ($serieA as $key => $value){
-        //     echo "<li>Sono il valore di " . $key . " : " 
-        //     . for($i=0; $i<11; $i++){
-        //         $key
-        //     }.
-        //     "</li>";
-        // }
+        foreach($serieA as $key => $value){
+            echo $key ;
+            foreach ($tutte as $key => $value){
+                echo "<ul>Sono il valore di " . $key . " : " ;
+                    foreach($value as $giocatore){
+                        echo "<li>  $giocatore </li>";
+                    }
+                echo "</ul>";
+            };
+        };
 
         foreach ($partite as $key => $value){
             echo "<li>Sono il valore di " . $key . " : " . $value . "</li>";
@@ -43,6 +52,32 @@
 
 
     ?>
+
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" rowspan="2">#</th>
+                    <th scope="col" colspan="2" style="text-align: center">Partita</th>
+                </tr>
+                <tr>
+                    <?php foreach($tutte as $key => $value) { ?>
+                    <th scope="col" style="text-align: center"> <?php echo $key; }  ?> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                    for($i=0; $i<11; $i++){
+                        echo "<tr>
+                            <th>$i</th>
+                            <td>$squadra1[$i]</td>
+                            <td>$squadra2[$i]</td>
+                            </tr>";
+                    }
+                ?>
+            </tbody>
+        </table>
+    </div>
 
     <table class="table">
     <thead>
